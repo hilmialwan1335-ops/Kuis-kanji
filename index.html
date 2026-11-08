@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Kuis Kanji N3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f2f4f7;--card:#fff;--fg:#1c2438;--mut:#667089;--bd:#d8dde7;--ac:#2f4a8a;--acf:#fff;--ok:#1f7a5c;--okb:#dff3ea;--no:#c4352b;--nob:#fbe4e1;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161f;--card:#1b2130;--fg:#e8ebf3;--mut:#9aa3ba;--bd:#2c3448;--ac:#8fa8e8;--acf:#12161f;--ok:#5fd0a4;--okb:#173328;--no:#ff7b6e;--nob:#3a1c19;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12161f;--card:#1b2130;--fg:#e8ebf3;--mut:#9aa3ba;--bd:#2c3448;--ac:#8fa8e8;--acf:#12161f;--ok:#5fd0a4;--okb:#173328;--no:#ff7b6e;--nob:#3a1c19;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,"Hiragino Sans","Noto Sans JP","Segoe UI",sans-serif}
+main{max-width:520px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 12px}
+nav{display:flex;gap:6px;margin-bottom:14px}
+nav button,.seg button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:8px;font:inherit;cursor:pointer}
+nav button.on,.seg button.on{background:var(--ac);color:var(--acf);border-color:var(--ac)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.row{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.seg{display:flex;gap:6px;flex:1}
+select{padding:10px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--fg);font:inherit}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px}
+.prog{color:var(--mut);font-size:14px;margin-bottom:6px}
+.word{font:600 56px/1.2 "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;text-align:center;margin:10px 0 4px;overflow-wrap:anywhere}
+.bu{margin-top:12px;padding:12px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)}.bl{display:flex;gap:10px;align-items:baseline;margin-top:6px}.bk{font:600 26px "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;min-width:30px}
+.sent{font:600 22px/1.8 "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;text-align:center;margin:10px 0 18px}
+.fw{display:inline-flex;flex-direction:column;align-items:center}.fr{font:500 13px/1.3 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;color:var(--mut);margin-top:2px}
+.ask{text-align:center;color:var(--mut);margin-bottom:16px}
+.opt{display:block;width:100%;text-align:left;padding:13px 14px;margin-bottom:8px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);border-radius:8px;font:inherit;cursor:pointer}
+.opt.ok{background:var(--okb);border-color:var(--ok)}
+.opt.no{background:var(--nob);border-color:var(--no)}
+input[type=text],textarea{width:100%;padding:13px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit;font-size:18px}
+textarea{font-size:15px;min-height:140px}
+.go{width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:var(--ac);color:var(--acf);font:600 16px inherit;cursor:pointer}
+.fb{margin-top:14px;padding:12px 14px;border-radius:8px}
+.fb.ok{background:var(--okb);color:var(--ok)}
+.fb.no{background:var(--nob);color:var(--no)}
+.fb b{font-size:18px}.fb span{color:var(--fg)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px}
+.stat b{display:block;font-size:26px}.stat small{color:var(--mut)}
+.weak{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}
+.weak:last-child{border:0}.weak small{color:var(--mut)}
+.mut{color:var(--mut);font-size:14px}
+.red{background:transparent;color:var(--no);border:1px solid var(--no);margin-top:16px}
+
+/* Auth & Leaderboard Header Bar */
+.auth-bar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:12px}
+.auth-profile{display:flex;align-items:center;gap:10px}
+.auth-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.btn-auth{padding:6px 12px;font-size:13px;border-radius:6px;border:1px solid var(--ac);background:var(--ac);color:var(--acf);cursor:pointer;font-weight:600}
+.btn-auth.out{background:transparent;color:var(--fg);border-color:var(--bd)}
+.lb-rank{font-weight:bold;min-width:24px;text-align:center;color:var(--ac)}
+.lb-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd)}
+</style>
+</head>
+<body>
+<main>
+<h1>Kuis Kanji dan Kosakata</h1>
+
+<!-- Baris Login Google & Status Sync -->
+<div class="auth-bar">
+  <div class="auth-profile" id="auth-info">
+    <span class="mut" id="sy">Memuat akun...</span>
+  </div>
+  <button id="btn-login" class="btn-auth">Login Google</button>
+</div>
+
+<select id="ms" aria-label="Set materi" style="width:100%;margin-bottom:12px"></select>
+<nav id="nav">
+  <button data-v="quiz" class="on">Kuis</button>
+  <button data-v="stat">Statistik</button>
+  <button data-v="lb">Leaderboard</button>
+  <button data-v="add">Tambah kata</button>
+</nav>
+<div id="v"></div>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Config Firebase Proyek Kuis Kanji
+const firebaseConfig = {
+  apiKey: "AIzaSyBgdH-0Eb4k_O6rnou1B_C3FAFc6rKp3qk",
+  authDomain: "kuis-kanji.firebaseapp.com",
+  projectId: "kuis-kanji",
+  storageBucket: "kuis-kanji.firebasestorage.app",
+  messagingSenderId: "462883835487",
+  appId: "1:462883835487:web:d6cbfa186d69f0341f15ea"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+let currentUser = null;
+
+const BASE=[
+["政治","せいじ","politik","Kanji"],["経済","けいざい","ekonomi","Kanji"],["社会","しゃかい","masyarakat","Kanji"],["文化","ぶんか","budaya","Kanji"],["会議","かいぎ","rapat","Kanji"],["関係","かんけい","hubungan","Kanji"],["意見","いけん","pendapat","Kanji"],["情報","じょうほう","informasi","Kanji"],["場合","ばあい","kasus, keadaan","Kanji"],["理由","りゆう","alasan","Kanji"],["結果","けっか","hasil","Kanji"],["原因","げんいん","penyebab","Kanji"],["目的","もくてき","tujuan","Kanji"],["方法","ほうほう","cara, metode","Kanji"],["問題","もんだい","masalah, soal","Kanji"],["経験","けいけん","pengalaman","Kanji"],["習慣","しゅうかん","kebiasaan","Kanji"],["資料","しりょう","materi, dokumen","Kanji"],["予定","よてい","rencana, jadwal","Kanji"],["準備","じゅんび","persiapan","Kanji"],
+["増える","ふえる","bertambah","Kosakata"],["減る","へる","berkurang","Kosakata"],["決める","きめる","memutuskan","Kosakata"],["伝える","つたえる","menyampaikan","Kosakata"],["集める","あつめる","mengumpulkan","Kosakata"],["続ける","つづける","melanjutkan","Kosakata"],["比べる","くらべる","membandingkan","Kosakata"],["調べる","しらべる","memeriksa, menyelidiki","Kosakata"],["育てる","そだてる","membesarkan, merawat","Kosakata"],["間違える","まちがえる","salah, keliru","Kosakata"],["忙しい","いそがしい","sibuk","Kosakata"],["詳しい","くわしい","rinci, mahir","Kosakata"],["珍しい","めずらしい","langka, jarang","Kosakata"],["厳しい","きびしい","ketat, keras","Kosakata"],["正しい","ただしい","benar","Kosakata"],["確かめる","たしかめる","memastikan","Kosakata"],["諦める","あきらめる","menyerah","Kosakata"],["触る","さわる","menyentuh","Kosakata"],["迷う","まよう","bingung, tersesat","Kosakata"],["慌てる","あわてる","panik, tergesa-gesa","Kosakata"]];
+const SETS={"JLPT N3":BASE};
+const ADD={Kanji:"事情|じじょう|keadaan, situasi;条件|じょうけん|syarat;状況|じょうきょう|kondisi, situasi;状態|じょうたい|keadaan;印象|いんしょう|kesan;感想|かんそう|kesan, komentar;気分|きぶん|suasana hati;性格|せいかく|sifat, karakter;能力|のうりょく|kemampuan;努力|どりょく|usaha;成功|せいこう|sukses;失敗|しっぱい|kegagalan;成績|せいせき|nilai, prestasi;目標|もくひょう|target, sasaran;計画|けいかく|rencana;相談|そうだん|konsultasi;連絡|れんらく|kontak, menghubungi;報告|ほうこく|laporan;説明|せつめい|penjelasan;紹介|しょうかい|perkenalan;招待|しょうたい|undangan;参加|さんか|partisipasi;希望|きぼう|harapan;文句|もんく|keluhan;迷惑|めいわく|gangguan, merepotkan;約束|やくそく|janji;規則|きそく|peraturan;利用|りよう|penggunaan;種類|しゅるい|jenis;内容|ないよう|isi;大勢|おおぜい|banyak orang;普通|ふつう|biasa;実際|じっさい|kenyataan;最初|さいしょ|yang pertama;最後|さいご|yang terakhir;最近|さいきん|akhir-akhir ini;将来|しょうらい|masa depan;過去|かこ|masa lalu;都合|つごう|kecocokan waktu, keadaan;自然|しぜん|alam;環境|かんきょう|lingkungan;交通|こうつう|lalu lintas;産業|さんぎょう|industri",Kosakata:"断る|ことわる|menolak;頼む|たのむ|meminta, memohon;誘う|さそう|mengajak;褒める|ほめる|memuji;叱る|しかる|memarahi;慣れる|なれる|terbiasa;疑う|うたがう|meragukan;信じる|しんじる|percaya;守る|まもる|menjaga, menaati;逃げる|にげる|melarikan diri;探す|さがす|mencari;拾う|ひろう|memungut;届ける|とどける|mengantarkan;片付ける|かたづける|merapikan;貯める|ためる|menabung, menimbun;支払う|しはらう|membayar;引っ越す|ひっこす|pindah rumah;合う|あう|cocok, pas;似る|にる|mirip;変わる|かわる|berubah;伸びる|のびる|memanjang, berkembang;冷める|さめる|mendingin;増やす|ふやす|menambah;減らす|へらす|mengurangi;乾く|かわく|mengering;濡れる|ぬれる|basah;壊れる|こわれる|rusak;割れる|われる|pecah;折れる|おれる|patah;汚れる|よごれる|menjadi kotor;太る|ふとる|menjadi gemuk;痩せる|やせる|menjadi kurus;羨ましい|うらやましい|iri;恐ろしい|おそろしい|menakutkan;激しい|はげしい|hebat, sengit;鋭い|するどい|tajam;厚い|あつい|tebal;薄い|うすい|tipis;細かい|こまかい|halus, rinci;柔らかい|やわらかい|lembut;硬い|かたい|keras;濃い|こい|pekat;必ず|かならず|pasti;決して|けっして|sama sekali tidak;全然|ぜんぜん|sama sekali;非常に|ひじょうに|sangat;確か|たしか|kalau tidak salah, pasti;急に|きゅうに|tiba-tiba;特に|とくに|terutama;例えば|たとえば|misalnya"};
+for(const k in ADD)ADD[k].split(";").forEach(s=>{const f=s.split("|");if(!BASE.some(i=>i[0]===f[0]))BASE.push([f[0],f[1],f[2],k])});
+const TM={"Masyarakat & Lingkungan":"政治 経済 社会 文化 産業 交通 自然 環境","Kerja & Rencana":"会議 資料 予定 準備 計画 目標 規則 条件 利用 約束 参加","Hasil & Kemampuan":"結果 原因 理由 目的 方法 問題 経験 習慣 能力 努力 成功 失敗 成績","Komunikasi":"関係 意見 情報 報告 連絡 相談 説明 紹介 招待 文句 迷惑 感想","Pikiran & Perasaan":"印象 気分 性格 希望 間違える 確かめる 諦める 迷う 慌てる 慣れる 疑う 信じる 羨ましい 恐ろしい","Keadaan & Waktu":"場合 事情 状況 状態 都合 内容 種類 普通 実際 大勢 最初 最後 最近 将来 過去","Tindakan Sehari-hari":"決める 伝える 集める 続ける 比べる 調べる 育てる 断る 頼む 誘う 褒める 叱る 探す 拾う 届ける 片付ける 貯める 支払う 引っ越す 守る 逃げる 触る","Perubahan & Kondisi Benda":"増える 減る 増やす 減らす 変わる 伸びる 冷める 乾く 濡れる 壊れる 割れる 折れる 汚れる 太る 痩せる 合う 似る","Sifat & Kualitas":"忙しい 詳しい 珍しい 厳しい 正しい 激しい 鋭い 厚い 薄い 細かい 柔らかい 硬い 濃い","Keterangan":"必ず 決して 全然 非常に 確か 急に 特に 例えば"};
+for(const t in TM)TM[t].split(" ").forEach(w=>{const i=BASE.find(x=>x[0]===w);if(i)i[5]=t});
+const BU={"政":"攵 (memukul, tindakan) + 正 (benar): bertindak benar untuk mengatur","治":"氵 (air) + 台: mengatur air (irigasi), lalu jadi memerintah atau menyembuhkan","経":"糸 (benang) + 圣: benang lusi yang membentang, jadi melalui atau mengalami","済":"氵 (air) + 斉 (rata): air yang merata, urusan selesai","社":"礻 (altar, roh) + 土 (tanah): altar dewa tanah, tempat orang berkumpul","会":"人 (atap, orang) + 云 (berkata): orang-orang bertemu dan berbicara","文":"亠 (tutup) + 乂 (silang): tulisan yang disilang-silang dengan goresan","化":"亻 (orang) + 匕 (orang terbalik): orang yang berubah wujud","議":"言 (ucapan) + 義 (kebenaran): ucapan untuk mencari kebenaran","関":"門 (gerbang) + 关: gerbang yang saling dikaitkan","係":"亻 (orang) + 系 (benang, rantai): orang yang saling terikat","意":"音 (suara) + 心 (hati): suara dari dalam hati","見":"目 (mata) + 儿 (kaki): mata yang berjalan, melihat","情":"忄 (hati) + 青 (biru, segar): perasaan yang jernih","報":"幸 + 卩 (orang berlutut) + 又 (tangan): orang berlutut menerima kabar atau balasan","場":"土 (tanah) + 昜 (matahari terbit): tanah tempat matahari bersinar","合":"人 (atap) + 一 + 口 (mulut): banyak mulut bertemu di bawah satu atap","理":"王 (permata) + 里 (desa): memoles permata hingga tampak polanya","由":"田 (ladang) dengan tunas yang mencuat: asal dari mana sesuatu keluar","結":"糸 (benang) + 吉 (baik): ikatan benang yang kuat","果":"木 (pohon) + 田 (buah): buah di atas pohon","因":"囗 (kotak) + 大 (besar): orang bersandar pada tikar, jadi sebab","原":"厂 (tebing) + 白 + 小 (mata air): sumber air di kaki tebing","目":"目 (mata) sendiri adalah bushu, bentuknya mata yang ditegakkan","的":"白 (putih) + 勺 (sendok): lingkaran putih sasaran","方":"方 sendiri adalah bushu: arah, jalan, cara","法":"氵 (air) + 去 (pergi): air mengalir mengikuti aturannya","問":"門 (gerbang) + 口 (mulut): mulut di depan gerbang, bertanya","題":"是 (ini, benar) + 頁 (kepala, halaman): kepala halaman, judul atau soal","験":"馬 (kuda) + 僉: kuda diuji, jadi ujian atau pengalaman","習":"羽 (sayap) + 白: anak burung mengepak berlatih","慣":"忄 (hati) + 貫 (menembus): hati yang sudah menembus jadi biasa","資":"次 + 貝 (kerang, harta): harta atau modal","料":"米 (beras) + 斗 (takaran): menakar beras, bahan","予":"bushu 亅 (kait): bentuk kait yang mengantisipasi lebih dulu","定":"宀 (atap) + 正 (benar): di bawah atap dengan benar, jadi tetap atau ditetapkan","準":"氵 (air) + 隹 (burung) + 十: air yang rata sebagai ukuran standar","備":"亻 (orang) + 用 (dipakai): orang menyiapkan alat","増":"土 (tanah) + 曽 (bertumpuk): tanah menumpuk, bertambah","減":"氵 (air) + 咸 (semua): air surut, berkurang","決":"氵 (air) + 夬 (memotong): memotong aliran air, memutuskan","伝":"亻 (orang) + 云 (berkata): orang menyampaikan ucapan","集":"隹 (burung) + 木 (pohon): burung berkumpul di pohon","続":"糸 (benang) + 売 (menjual): benang yang disambung terus","比":"匕 + 匕: dua orang berdampingan, dibandingkan","調":"言 (ucapan) + 周 (keliling): bertanya ke sekeliling, menyelidiki","育":"𠫓 (anak terbalik) + 月 (daging): membesarkan anak","間":"門 (gerbang) + 日 (matahari): matahari mengintip lewat celah gerbang","違":"辶 (jalan) + 韋: jalan yang berbeda","忙":"忄 (hati) + 亡 (hilang): hati terasa hilang karena sibuk","詳":"言 (ucapan) + 羊 (domba): penjelasan yang rinci","珍":"王 (permata) + 㐱: permata yang langka","厳":"厂 (tebing) + 敢 (berani): sikap keras dan tegas","正":"一 + 止 (berhenti): berhenti tepat di garis, benar","確":"石 (batu) + 隺: keras seperti batu, pasti","諦":"言 (ucapan) + 帝 (kaisar): kata kaisar tak bisa dibantah, menyerah","触":"角 (tanduk) + 虫 (serangga): tanduk serangga menyentuh","迷":"辶 (jalan) + 米 (beras): jalan bertabur beras, bingung","慌":"忄 (hati) + 荒 (kacau): hati yang kacau, panik"};
+const BX="事|⺕ (tangan) memegang tongkat: mengurus suatu urusan;状|爿 (papan) + 犬 (anjing): anjing di depan papan, keadaan;況|氵 (air) + 兄: arus keadaan;条|夂 + 木 (pohon): ranting memanjang, pasal atau syarat;件|亻 (orang) + 牛 (sapi): orang dan sapi, perkara;態|能 (kemampuan) + 心 (hati): kemampuan hati tampil, sikap;印|爪 (tangan) + 卩 (segel): tangan menekan cap;象|bentuk gajah: gambaran, gejala;感|咸 (semua) + 心 (hati): seluruh hati merasa;想|相 (saling) + 心 (hati): hati yang memikirkan;気|气 (uap) + ×: uap yang naik, semangat;分|八 (membelah) + 刀 (pisau): pisau membagi bagian;性|忄 (hati) + 生 (lahir): sifat bawaan hati;格|木 (kayu) + 各 (masing-masing): kisi kayu, kedudukan;能|bentuk beruang yang kuat: kemampuan;力|bentuk lengan berotot: tenaga;努|奴 (budak) + 力 (tenaga): mengerahkan tenaga, usaha;功|工 (kerja) + 力 (tenaga): kerja keras menghasilkan jasa;失|夫 dengan goresan terlepas: kehilangan;敗|貝 (harta) + 攵 (memukul): harta dipukul rusak, kalah;績|糸 (benang) + 責 (tanggung jawab): benang dipintal, hasil;成|戊 (tombak) + 丁: membangun, menjadi;標|木 (kayu) + 票 (karcis): tiang penanda, target;画|田 dalam bingkai: gambar, goresan;計|言 (ucapan) + 十 (sepuluh): menghitung sambil berkata;談|言 (ucapan) + 炎 (api): ucapan yang menghangat, berbincang;相|木 (pohon) + 目 (mata): mata memandang, saling;連|辶 (jalan) + 車 (kereta): kereta berjejer, berkaitan;絡|糸 (benang) + 各: benang yang saling mengikat;告|牛 (sapi) + 口 (mulut): sapi mengaum, memberi tahu;説|言 (ucapan) + 兑: ucapan yang melepas kebingungan, penjelasan;明|日 (matahari) + 月 (bulan): terang;紹|糸 (benang) + 召 (memanggil): menyambung orang dengan orang;介|人 di antara dua sisi: perantara;招|扌 (tangan) + 召 (memanggil): melambai memanggil;待|彳 (jalan) + 寺 (kuil): berdiam di jalan, menunggu;参|bintang di atas orang besar: ikut serta;加|力 (tenaga) + 口 (mulut): tenaga ditambah suara;希|乂 + 巾 (kain): kain tipis berpola, jarang, harapan;望|亡 (hilang) + 月 (bulan) + 王: memandang bulan jauh, berharap;句|勹 (membungkus) + 口 (mulut): kata yang terbungkus, kalimat;惑|或 (barangkali) + 心 (hati): hati bimbang;約|糸 (benang) + 勺 (sendok): benang pengikat janji;束|木 (kayu) + 口: seikat kayu;規|夫 + 見 (melihat): melihat dengan ukuran, aturan;則|貝 (harta) + 刂 (pisau): memotong harta sesuai aturan;利|禾 (padi) + 刂 (sabit): sabit memanen padi, untung;用|bentuk papan pagar: dipakai;種|禾 (padi) + 重 (berat): benih padi, jenis;類|米 + 大 + 頁 (kepala): kepala yang mirip, golongan;容|宀 (atap) + 谷 (lembah): ruang di bawah atap, isi;内|冂 (bingkai) + 人: orang di dalam bingkai;勢|埶 + 力 (tenaga): kekuatan yang tumbuh;通|辶 (jalan) + 甬: jalan tembus;普|並 + 日 (matahari): matahari menyinari merata;際|阝 (bukit) + 祭 (festival): batas tepi, saat;実|宀 (atap) berisi bagian dalam: isi, nyata;初|衣 (pakaian) + 刀 (pisau): pertama kali memotong kain;最|冃 (topi) + 取 (mengambil): mengambil paling atas;後|彳 (jalan) + 幺 + 夂 (kaki): langkah tertinggal di belakang;近|辶 (jalan) + 斤 (kapak): jalan yang dekat;将|爿 + 寸 (tangan): tangan memimpin, akan;来|bentuk gandum: datang;過|辶 (jalan) + 咼: melewati;去|土 + ム: melepaskan tanah;都|者 + 阝 (kota): kota tempat orang berkumpul;自|bentuk hidung: diri sendiri;然|月 (daging) + 犬 + 灬 (api): daging dibakar, demikian;環|王 (permata) + 睘: cincin permata, mengitari;境|土 (tanah) + 竟: batas tanah;交|亠 + 父: kaki bersilang, bergaul;産|立 + 生: berdiri lalu lahir, menghasilkan;業|bentuk papan alat kerja: pekerjaan;断|斤 (kapak) memutus benang: memutus, menolak;頼|束 + 刀 + 頁 (kepala): kepala bersandar, bergantung;誘|言 (ucapan) + 秀 (unggul): membujuk dengan ucapan;褒|衣 (pakaian) + 保: memuji dengan penghormatan;叱|口 (mulut) + 七: mulut yang menegur;疑|匕 + 矢 + 疋: bingung di persimpangan, ragu;信|亻 (orang) + 言 (ucapan): ucapan orang dipercaya;守|宀 (atap) + 寸 (tangan): tangan menjaga di bawah atap;逃|辶 (jalan) + 兆 (pertanda): lari lewat jalan;探|扌 (tangan) + 罙: tangan merogoh mencari;拾|扌 (tangan) + 合 (cocok): tangan memungut;届|尸 (tubuh) + 由: sampai ke tujuan;片|setengah dari 木 (kayu): sebelah;付|亻 (orang) + 寸 (tangan): menyerahkan, menempel;貯|貝 (harta) + 宁: menimbun harta;支|十 + 又 (tangan): tangan menyangga ranting;払|扌 (tangan) + ム: mengibas, membayar;引|弓 (busur) + 丨: menarik busur;越|走 (lari) + 戉: melintasi;似|亻 (orang) + 以: orang yang mirip;変|亦 + 夂: bentuk yang berubah;伸|亻 (orang) + 申: orang meregangkan badan;冷|冫 (es) + 令: dingin;乾|十 + 日 (matahari) + 乙: dikeringkan matahari;濡|氵 (air) + 需: terkena air;壊|土 (tanah) + 褱: runtuh, rusak;割|害 + 刂 (pisau): pisau membelah;折|扌 (tangan) + 斤 (kapak): mematahkan;汚|氵 (air) + 亏: air keruh, kotor;太|大 + 丶: besar dan tebal;痩|疒 (sakit) + 叟: tubuh kurus karena sakit;羨|羊 (domba) + 次: air liur melihat domba lezat, iri;恐|工 + 凡 + 心 (hati): hati yang takut;激|氵 (air) + 敫: air deras, hebat;鋭|金 (logam) + 兑: logam yang tajam;厚|厂 (tebing) + 日 + 子: tebal;薄|艹 (rumput) + 溥: tipis;細|糸 (benang) + 田: benang halus;柔|矛 (tombak) + 木 (kayu): kayu lentur;硬|石 (batu) + 更: keras;濃|氵 (air) + 農 (petani): cairan kental;必|心 (hati) + 丿: hati pasti;全|入 + 王: semuanya masuk, lengkap;非|dua sayap berlawanan: bukan;常|尚 + 巾 (kain): kain panjang, selalu;急|ク + ヨ + 心 (hati): hati tergesa;特|牛 (sapi) + 寺: sapi istimewa;例|亻 (orang) + 列 (baris): orang berbaris, contoh";
+BX.split(";").forEach(s=>{const f=s.split("|");if(f[1]&&!BU[f[0]])BU[f[0]]=f[1]});
+
+const $=s=>document.querySelector(s),KEY="kuis-n3-v1",PER=10;
+let S={p:{},c:[]},view="quiz",mode="mc",cat="*",tema="*",cur=null,n=0,ok=0,last="",locked=false,qm="mc";
+
+try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&d.p)S=d}catch(e){}
+
+const curSet=()=>{const a=Object.keys(SETS).concat(S.ns||[]);return a.includes(S.set)?S.set:a[0]};
+const items=()=>(SETS[curSet()]||[]).concat(S.c.filter(i=>(i[4]||"JLPT N3")===curSet()));
+
+function fillSets(){const s=$("#ms");if(!s)return;s.textContent="";Object.keys(SETS).concat(S.ns||[]).forEach(k=>{const o=el("option","",k);o.value=k;if(k===curSet())o.selected=true;s.append(o)});const o=el("option","","+ Set baru…");o.value="__new";s.append(o)}
+const rec=w=>S.p[w]||(S.p[w]={b:0,r:0,x:0});
+const stg=i=>{const p=S.p[i[0]];if(!p||p.b<4||i[0]===i[1])return"mn";return(p.rb||0)<4?"rd":(p.tb||0)<4?"tr":"mn"};
+const full=(i,p)=>!!p&&p.b>=4&&(i[0]===i[1]||((p.rb||0)>=4&&(p.tb||0)>=4));
+
+function tricky(r,n){
+  const O="おこそとのほもよろごぞどぼぽょ",E="えけせてねへめれげぜでべぺ",K="かきくけこさしすせそたちつてとぱぴぷぺぽ",M={};
+  "かが,きぎ,くぐ,けげ,こご,さざ,しじ,すず,せぜ,そぞ,ただ,てで,とど,はば,ひび,ふぶ,へべ,ほぼ".split(",").forEach(p=>{M[p[0]]=p[1];M[p[1]]=p[0]});
+  const c=[...r],A=new Set,B=new Set,add=(T,a)=>{const s=a.join("");if(s!==r&&s.length>=2)T.add(s)};
+  c.forEach((ch,k)=>{const nx=c[k+1],pv=c[k-1],L=c.slice(0,k+1),R=c.slice(k+1);
+    if(O.includes(ch))add(A,nx==="う"?[...L,...c.slice(k+2)]:[...L,"う",...R]);
+    if(E.includes(ch))add(A,nx==="い"?[...L,...c.slice(k+2)]:[...L,"い",...R]);
+    if(ch==="ゅ"&&nx!=="う")add(A,[...L,"う",...R]);
+    if(ch==="っ")add(A,[...c.slice(0,k),...R]);
+    else if(k>0&&K.includes(ch)&&!"ゃゅょっ".includes(pv))add(A,[...c.slice(0,k),"っ",...c.slice(k)]);
+    if(M[ch])add(B,c.map((x,j)=>j===k?M[ch]:x));
+    if("ゃゅょ".includes(ch))[..."ゃゅょ".replace(ch,"")].forEach(y=>add(B,c.map((x,j)=>j===k?y:x)));
+  });
+  let o=shuf([...A]).slice(0,2);
+  o=o.concat(shuf([...B]).slice(0,n-o.length));
+  if(o.length<n)o=o.concat(shuf([...A].filter(x=>!o.includes(x))).slice(0,n-o.length));
+  if(o.length<n)o=o.concat(shuf([...B].filter(x=>!o.includes(x))).slice(0,n-o.length));
+  if(o.length<n)o=o.concat(shuf(items().map(i=>i[1]).filter(x=>x!==r&&!o.includes(x))).slice(0,n-o.length));
+  return o;
+}
+const shuf=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const kana=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/\s+/g,"");
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+
+function pick(){
+  let pool=items().filter(i=>(cat==="*"||i[3]===cat)&&(tema==="*"||(i[5]||"Lainnya")===tema));if(!pool.length)pool=items();
+  if(pool.length>1)pool=pool.filter(i=>i[0]!==last);
+  const w=pool.map(i=>{const p=S.p[i[0]];return p?(stg(i)==="rd"?5-(p.rb||0):stg(i)==="tr"?5-(p.tb||0):5-p.b):6});
+  let r=Math.random()*w.reduce((a,b)=>a+b,0);
+  for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0)return pool[i]}
+  return pool[0];
+}
+
+function setView(v){view=v;document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));draw()}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>setView(b.dataset.v));
+
+function draw(){fillSets();const v=$("#v");v.textContent="";if(view==="quiz")drawQuiz(v);else if(view==="stat")drawStat(v);else if(view==="lb")drawLeaderboard(v);else drawAdd(v)}
+
+function drawQuiz(v){
+  if(!items().length){const e=el("div","card");e.append(el("div","mut","Set ini masih kosong. Buka tab Tambah kata untuk mengisinya."));v.append(e);return}
+  const row=el("div","row"),seg=el("div","seg");
+  [["mc","Pilihan ganda"],["ty","Ketik bacaan"],["bp","Bunpou"]].forEach(([k,t])=>{const b=el("button",mode===k?"on":"",t);b.onclick=()=>{mode=k;n=0;ok=0;next()};seg.append(b)});
+  const sel=el("select");[["*","Semua"]].concat([...new Set(items().map(i=>i[3]))].map(k=>[k,k])).forEach(([k,t])=>{const o=el("option","",t);o.value=k;if(k===cat)o.selected=true;sel.append(o)});
+  sel.onchange=()=>{cat=sel.value;n=0;ok=0;next()};
+  row.append(seg,sel);v.append(row);const r2=el("div","row"),ts=el("select");ts.style.width="100%";ts.setAttribute("aria-label","Tema");[["*","Semua tema"]].concat([...new Set(items().map(i=>i[5]||"Lainnya"))].map(k=>[k,k])).forEach(([k,t])=>{const o=el("option","",t);o.value=k;if(k===tema)o.selected=true;ts.append(o)});ts.onchange=()=>{tema=ts.value;n=0;ok=0;next()};r2.append(ts);v.append(r2);
+  const fl=el("label","mut");fl.style.display="block";fl.style.marginBottom="10px";const cb=el("input");cb.type="checkbox";cb.checked=!!S.f;cb.onchange=()=>{S.f=cb.checked;save();if(!locked)showQ()};fl.append(cb," Tampilkan furigana (hanya di mode pilihan ganda)");v.append(fl);
+  const box=el("div","card");box.id="q";v.append(box);
+  if(mode==="bp"&&!(BUNSETS[curSet()]||[]).length){box.append(el("div","mut","Set ini belum punya soal bunpou."));return}
+  if(cur&&locked){cur.started=false;locked=false}
+  if(!cur||!cur.started)next();else showQ();
+}
+function next(){if(mode==="bp"){return nextB()}
+  if(n>=PER){return done()}
+  cur=pick();cur.started=true;locked=false;qm=(mode==="ty"&&cur[0]!==cur[1])?"ty":"mc";
+  if(view==="quiz"){draw()}
+}
+function showQ(){if(qm==="bp"){return showB()}
+  const box=$("#q");if(!box)return;box.textContent="";
+  box.append(el("div","prog","Soal "+(n+1)+" dari "+PER+" · benar "+ok));
+  const wd=el("div","word");if(S.f&&qm==="mc"&&cur[0]!==cur[1]&&stg(cur)==="mn"){const fw=el("span","fw");fw.append(el("span","",cur[0]),el("span","fr",cur[1]));wd.append(fw)}else wd.textContent=cur[0];box.append(wd);
+  if(qm==="mc"){
+    const st=stg(cur),rd=st!=="mn",ix=rd?1:2;box.append(el("div","ask",st==="tr"?"Pilih bacaan yang benar. Awas panjang-pendek, っ, dan dakuten":rd?"Bagaimana bacaannya? (furigana)":"Apa artinya?"));
+    const m=st==="tr"?tricky(cur[1],3):shuf(items().filter(i=>i[ix]!==cur[ix]&&(i[3]===cur[3]||items().length<12))).slice(0,3).map(i=>i[ix]);
+    shuf([cur[ix]].concat(m)).forEach(t=>{const b=el("button","opt",t);b.onclick=()=>{if(locked)return;locked=true;const good=t===cur[ix];
+      box.querySelectorAll(".opt").forEach(o=>{if(o.textContent===cur[ix])o.classList.add("ok");else if(o===b)o.classList.add("no")});finish(good,box)};box.append(b)});
+  }else{
+    box.append(el("div","ask","Ketik bacaannya dalam hiragana"));
+    const inp=el("input");inp.type="text";inp.autocomplete="off";inp.autocapitalize="off";inp.setAttribute("aria-label","Bacaan");box.append(inp);
+    const go=el("button","go","Cek jawaban");
+    const chk=()=>{if(locked)return;locked=true;inp.disabled=true;finish(kana(inp.value)===kana(cur[1]),box);go.remove()};
+    go.onclick=chk;inp.onkeydown=e=>{if(e.key==="Enter")chk()};box.append(go);setTimeout(()=>inp.focus(),50);
+  }
+}
+function finish(good,box){
+  const p=rec(cur[0]);const sg=stg(cur);const fk=qm==="ty"?((p.rb||0)>=4?"tb":"rb"):sg==="tr"?"tb":sg==="rd"?"rb":"b";if(good){p[fk]=Math.min(4,(p[fk]||0)+1);p.r++;ok++}else{p[fk]=0;p.x++}
+  n++;last=cur[0];save();
+  const f=el("div","fb "+(good?"ok":"no"));
+  f.append(el("b","",good?"Benar":"Salah"));f.append(el("br"));
+  const s=el("span","",cur[0]+" ("+cur[1]+"): "+cur[2]);f.append(s);box.append(f);bushu(box);
+  const nb=el("button","go",n>=PER?"Lihat skor":"Soal berikutnya");nb.onclick=()=>{cur.started=false;next()};box.append(nb);nb.focus();
+}
+const BUN3=[
+["彼は熱がある（　）、会社に来た。","のに","ので,ために,ように","のに = padahal, meskipun. Menyatakan hasil yang berlawanan dengan harapan."],
+["日本語が上手になる（　）、毎日練習しています。","ように","ために,のに,くせに","Kata kerja yang tidak disengaja (なる, できる) memakai ように. ために dipakai untuk kata kerja yang disengaja."],
+["電車が遅れた（　）、遅刻してしまった。","せいで","おかげで,くせに,わりに","せいで = gara-gara, penyebab hal buruk."],
+["先生に手伝っていただいた（　）、早く終わりました。","おかげで","せいで,くせに,ばかりに","おかげで = berkat, penyebab hal baik."],
+["試験が近づく（　）、緊張してきた。","につれて","について,にとって,によって","Vる+につれて = seiring dengan, perubahan yang berjalan bersama."],
+["この問題は私（　）、難しすぎる。","にとって","について,によって,として","N+にとって = bagi (sudut pandang seseorang)."],
+["彼は医者（　）、病院で働いている。","として","にとって,について,によって","N+として = sebagai (kedudukan atau peran)."],
+["日本の文化（　）、レポートを書いた。","について","にとって,によって,として","N+について = tentang, mengenai."],
+["天気予報（　）、明日は雨だそうだ。","によると","によって,にとって,について","N+によると = menurut (sumber informasi), biasanya diikuti そうだ atau らしい."],
+["駅に着いた（　）、電話が鳴った。","とたん","まま,ばかり,ついでに","Vた+とたん(に) = begitu ..., langsung terjadi hal tak terduga."],
+["窓を開けた（　）、寝てしまった。","まま","とたん,ばかり,ほど","Vた+まま = dibiarkan dalam keadaan itu."],
+["彼女は泣き（　）、話した。","ながら","ばかり,ほど,だけ","Vます+ながら = sambil melakukan dua hal sekaligus."],
+["夏休みは海へ行く（　）しました。","ことに","ように,ために,ところに","Vる+ことにする = memutuskan untuk."],
+["若い（　）、いろいろな経験をしたほうがいい。","うちに","あいだ,まま,とたん","うちに = selagi masih (sebelum keadaan berubah). Dipakai untuk saran atau tindakan yang harus dilakukan sekarang."],
+["国（　）、習慣が違う。","によって","にとって,について,として","N+によって = tergantung, berbeda-beda menurut."],
+["このケーキはおいし（　）です。","そう","よう,らしい,はず","Stem adjektiva+そう = tampaknya (berdasarkan penampilan). Dari おいしい menjadi おいしそう."],
+["週末は映画を見（　）、買い物に行ったりします。","たり","ながら,ので,のに","Vたり、Vたりする = melakukan ini dan itu secara bergantian."],
+["彼は何も知らない（　）、偉そうに話す。","くせに","おかげで,せいで,ために","くせに = padahal (nada mengkritik)."],
+["この店は安い（　）、おいしい。","わりに","せいで,くせに,ために","わりに(は) = dibandingkan dengan yang diharapkan."],
+["昼ごはんを食べた（　）なので、まだお腹がいっぱいだ。","ばかり","まま,とたん,ほど","Vた+ばかり = baru saja."]];
+const BUNSETS={"JLPT N3":BUN3};
+function nextB(){if(n>=PER)return done();const L=BUNSETS[curSet()]||[];const w=L.map(b=>{const p=S.p["文:"+b[0]];return p?5-p.b:6});let r=Math.random()*w.reduce((a,c)=>a+c,0),k=0;for(;k<L.length-1;k++){r-=w[k];if(r<=0)break}
+  if(L.length>1&&L[k][0]===last)k=(k+1)%L.length;
+  cur=L[k];cur.started=true;locked=false;qm="bp";draw()}
+function showB(){const box=$("#q");if(!box)return;box.textContent="";
+  box.append(el("div","prog","Soal "+(n+1)+" dari "+PER+" · benar "+ok));
+  box.append(el("div","ask","Pilih yang tepat untuk mengisi bagian kosong"));
+  box.append(el("div","sent",cur[0]));
+  shuf([cur[1]].concat(cur[2].split(","))).forEach(t=>{const b=el("button","opt",t);b.onclick=()=>{if(locked)return;locked=true;box.querySelectorAll(".opt").forEach(o=>{if(o.textContent===cur[1])o.classList.add("ok");else if(o===b)o.classList.add("no")});finishB(t===cur[1],box)};box.append(b)})}
+function finishB(good,box){const p=rec("文:"+cur[0]);if(good){p.b=Math.min(4,p.b+1);p.r++;ok++}else{p.b=0;p.x++}
+  n++;last=cur[0];save();const f=el("div","fb "+(good?"ok":"no"));f.append(el("b","",good?"Benar":"Salah"),el("br"));
+  f.append(el("span","",cur[0].replace("（　）",cur[1])),el("br"),el("span","",cur[3]));box.append(f);
+  const nb=el("button","go",n>=PER?"Lihat skor":"Soal berikutnya");nb.onclick=()=>{cur.started=false;next()};box.append(nb);nb.focus()}
+function bushu(box){const L=[...cur[0]].filter(c=>BU[c]);if(!L.length)return;const d=el("div","bu");d.append(el("b","","Bushu"));L.forEach(c=>{const r=el("div","bl");r.append(el("span","bk",c),el("span","",BU[c]));d.append(r)});box.append(d)}
+function done(){
+  const box=$("#q");if(!box){draw();return}
+  box.textContent="";cur=null;
+  box.append(el("div","word",ok+" / "+PER));
+  box.append(el("div","ask",ok>=9?"Sangat kuat. Lanjutkan ke sesi berikutnya.":ok>=6?"Cukup baik. Kata yang salah akan muncul lebih sering.":"Masih banyak yang perlu diulang. Kata yang salah akan muncul lebih sering."));
+  const b=el("button","go","Mulai sesi baru");b.onclick=()=>{n=0;ok=0;last="";next()};box.append(b);
+}
+
+function radar(axes){
+  const NS="http://www.w3.org/2000/svg",cx=180,cy=130,R=70,N=axes.length;
+  const svg=document.createElementNS(NS,"svg");svg.setAttribute("viewBox","0 0 360 260");svg.style.width="100%";svg.setAttribute("role","img");svg.setAttribute("aria-label","Grafik radar kemajuan belajar");
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/N;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]};
+  [.25,.5,.75,1].forEach(f=>svg.append(mk("polygon",{points:axes.map((_,i)=>pt(i,R*f).join(",")).join(" "),fill:"none",stroke:"var(--bd)"})));
+  axes.forEach((a,i)=>{const[x,y]=pt(i,R);svg.append(mk("line",{x1:cx,y1:cy,x2:x,y2:y,stroke:"var(--bd)"}));
+    const[lx,ly]=pt(i,R+16);const t=mk("text",{x:lx,y:ly-6,"text-anchor":lx<cx-5?"end":lx>cx+5?"start":"middle",fill:"var(--mut)","font-size":"11"});
+    const s1=mk("tspan",{x:lx});s1.textContent=a.l;const s2=mk("tspan",{x:lx,dy:13});s2.textContent=Math.round(a.v*100)+"%";t.append(s1,s2);svg.append(t)});
+  svg.append(mk("polygon",{points:axes.map((a,i)=>pt(i,R*a.v).join(",")).join(" "),fill:"var(--ac)","fill-opacity":".25",stroke:"var(--ac)","stroke-width":"2"}));
+  axes.forEach((a,i)=>{const[x,y]=pt(i,R*a.v);svg.append(mk("circle",{cx:x,cy:y,r:3.5,fill:"var(--ac)"}))});
+  return svg;
+}
+function drawStat(v){
+  const all=items();let seen=0,mast=0,am=0,r=0,x=0;const c={};
+  all.forEach(i=>{const p=S.p[i[0]];if(!p)return;seen++;if(p.b>=4)am++;if(full(i,p))mast++;r+=p.r;x+=p.x;const tt=i[5]||i[3];const k=c[tt]||(c[tt]={r:0,x:0});k.r+=p.r;k.x+=p.x});
+  const pct=(a,b)=>a+b?Math.round(a/(a+b)*100)+"%":"-";
+  const g=el("div","stats");
+  [[all.length,"total kata"],[seen,"sudah dicoba"],[am,"arti dikuasai (tahap bacaan)"],[mast,"hafal penuh (arti, bacaan, jebakan)"],[pct(r,x),"akurasi keseluruhan"]].forEach(([a,b])=>{const s=el("div","stat");s.append(el("b","",a),el("small","",b));g.append(s)});
+  v.append(g);
+  const rc=el("div","card");rc.style.marginBottom="12px";rc.append(el("b","","Peta kemajuan"));
+  if(seen){const axes=[];[...new Set(all.map(i=>i[3]))].forEach(k=>{const li=all.filter(i=>i[3]===k);let m=0,r2=0,x2=0;li.forEach(i=>{const p=S.p[i[0]];if(p){if(full(i,p))m++;r2+=p.r;x2+=p.x}});axes.push({l:"Akurasi "+k,v:r2+x2?r2/(r2+x2):0});axes.push({l:"Hafal "+k,v:m/li.length})});rc.append(radar(axes))}
+  else rc.append(el("div","mut","Grafik muncul setelah kamu mengerjakan satu sesi kuis."));
+  v.append(rc);
+  const bl=BUNSETS[curSet()]||[];if(bl.length){let br=0,bx=0;bl.forEach(b=>{const p=S.p["文:"+b[0]];if(p){br+=p.r;bx+=p.x}});const bc=el("div","card");bc.style.marginBottom="12px";bc.append(el("b","","Bunpou"),el("div","weak","Akurasi: "+pct(br,bx)+" ("+(br+bx)+" jawaban dari "+bl.length+" soal)"));v.append(bc)}
+  const cc=el("div","card");cc.append(el("b","","Akurasi per tema"));
+  Object.keys(c).forEach(k=>{cc.append(el("div","weak",k+": "+pct(c[k].r,c[k].x)))});
+  if(!Object.keys(c).length)cc.append(el("div","mut","Belum ada data. Kerjakan satu sesi kuis dulu."));
+  v.append(cc);
+  const wk=all.filter(i=>S.p[i[0]]&&S.p[i[0]].x>0).sort((a,b)=>(S.p[b[0]].x-S.p[b[0]].r)-(S.p[a[0]].x-S.p[a[0]].r)).slice(0,8);
+  const wc=el("div","card");wc.style.marginTop="12px";wc.append(el("b","","Kata yang paling sering salah"));
+  wk.forEach(i=>{const d=el("div","weak"),l=el("div");l.append(el("div","",i[0]+" ("+i[1]+")"),el("small","",i[2]));d.append(l,el("small","","salah "+S.p[i[0]].x+"x · benar "+S.p[i[0]].r+"x"));wc.append(d)});
+  if(!wk.length)wc.append(el("div","mut","Belum ada kata yang salah."));
+  v.append(wc);
+  const rb=el("button","go red","Hapus semua progres");rb.onclick=()=>{if(confirm("Hapus semua progres belajar?")){S.p={};save();n=0;ok=0;cur=null;draw()}};v.append(rb);
+}
+
+// Tampilan Papan Peringkat (Leaderboard)
+async function drawLeaderboard(v){
+  const c=el("div","card");
+  c.append(el("b","","Papan Peringkat Global"));
+  c.append(el("div","mut","Peringkat disusun berdasarkan jumlah kata/kanji yang sudah dihafal penuh."));
+  c.style.marginBottom="12px";
+  v.append(c);
+
+  const lbCard=el("div","card");
+  lbCard.append(el("div","mut","Memuat daftar peringkat..."));
+  v.append(lbCard);
+
+  try{
+    const querySnapshot = await getDocs(collection(db, "leaderboard"));
+    const list = [];
+    querySnapshot.forEach((doc) => {
+      list.push(doc.data());
+    });
+    list.sort((a,b) => (b.mastered || 0) - (a.mastered || 0));
+
+    lbCard.textContent = "";
+    if(!list.length){
+      lbCard.append(el("div","mut","Belum ada pengguna di leaderboard. Jadilah yang pertama!"));
+      return;
+    }
+    list.forEach((item, index) => {
+      const row = el("div","lb-row");
+      const left = el("div","row");
+      left.style.margin = "0";
+      left.append(el("span","lb-rank","#" + (index + 1)));
+      left.append(el("div","",item.name || "Anonim"));
+      row.append(left, el("b","", (item.mastered || 0) + " hafal"));
+      lbCard.append(row);
+    });
+  } catch(e){
+    lbCard.textContent = "";
+    lbCard.append(el("div","mut","Gagal memuat leaderboard. Pastikan kamu sudah login."));
+  }
+}
+
+function drawAdd(v){
+  const c=el("div","card");
+  c.append(el("div","mut","Satu kata per baris, dipisah koma: kata,bacaan,arti,kategori. Kategori boleh dikosongkan (otomatis Kosakata). Contoh: 約束,やくそく,janji,Kanji"));
+  const t=el("textarea");t.setAttribute("aria-label","Daftar kata");t.style.marginTop="10px";c.append(t);
+  const msg=el("div","mut");msg.style.marginTop="8px";
+  const b=el("button","go","Tambahkan kata");
+  b.onclick=()=>{let add=0;t.value.split("\n").forEach(l=>{const f=l.split(/[,\t]/).map(s=>s.trim());if(f.length>=3&&f[0]&&f[1]&&f[2]&&!items().some(i=>i[0]===f[0])){S.c.push([f[0],f[1],f[2],f[3]||"Kosakata",curSet()]);add++}});
+    save();t.value="";msg.textContent=add+" kata ditambahkan ke set "+curSet()+". Total kata: "+items().length+"."};
+  c.append(b,msg);v.append(c);
+  const bk=el("div","card");bk.style.marginTop="12px";
+  bk.append(el("b","","Cadangan progres"),el("div","mut","Ekspor: tekan Buat kode, lalu salin teksnya dan simpan (misalnya di Notes). Impor: tempel kode, lalu tekan Impor. Impor menggabungkan dengan progres yang sudah ada."));
+  const ta=el("textarea");ta.style.marginTop="10px";ta.setAttribute("aria-label","Kode cadangan");
+  const bm=el("div","mut");bm.style.marginTop="8px";
+  const be=el("button","go","Buat kode ekspor");
+  be.onclick=()=>{ta.value=JSON.stringify({v:1,p:S.p,c:S.c,ns:S.ns||[],set:S.set,f:!!S.f});ta.focus();ta.select();let cp=false;try{cp=document.execCommand("copy")}catch(e){}bm.textContent=cp?"Kode dibuat dan disalin. Tempel ke Notes sebagai cadangan.":"Kode dibuat. Tekan lama pada teks, pilih Select All, lalu Copy."};
+  const bi=el("button","go","Impor dari kode");bi.style.background="transparent";bi.style.color="var(--ac)";bi.style.border="1px solid var(--ac)";
+  bi.onclick=()=>{try{const d=JSON.parse(ta.value);if(!d||typeof d.p!=="object")throw 0;S=merge(S,{p:d.p,c:d.c||[],ns:d.ns||[],set:d.set,f:d.f});save();bm.textContent="Impor berhasil. "+Object.keys(d.p).length+" catatan progres digabung.";ta.value=""}catch(e){bm.textContent="Kode tidak valid. Pastikan seluruh teks tertempel."}};
+  bk.append(ta,be,bi,bm);v.append(bk);
+}
+
+let tm;
+function sy(t){const e=$("#sy");if(e)e.textContent=t}
+
+function countMastered(){
+  const all=items();
+  let mast=0;
+  all.forEach(i=>{const p=S.p[i[0]];if(full(i,p))mast++});
+  return mast;
+}
+
+// Logika Save & Sync Firestore
+async function push(){
+  if(!currentUser) return;
+  clearTimeout(tm);
+  tm=setTimeout(async ()=>{
+    try{
+      sy("Menyimpan online...");
+      // Save data progres personal
+      await setDoc(doc(db, "users", currentUser.uid, "appData", "progress"), JSON.parse(JSON.stringify(S)));
+      
+      // Update data ke Leaderboard global
+      const name = currentUser.displayName ? currentUser.displayName.slice(0,20) : "Pengguna Kanji";
+      await setDoc(doc(db, "leaderboard", currentUser.uid), {
+        name: name,
+        mastered: countMastered(),
+        updated: Date.now()
+      });
+      sy("Tersinkron ke akun Google");
+    }catch(e){
+      sy("Gagal sinkron, data tersimpan di perangkat");
+    }
+  },800);
+}
+
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}push()};
+
+function merge(a,b){
+  const o={p:{},c:[],f:a.f!==undefined?!!a.f:!!b.f,set:a.set||b.set,ns:[...new Set([...(a.ns||[]),...(b.ns||[])])]};
+  new Set([...Object.keys(a.p||{}),...Object.keys(b.p||{})]).forEach(k=>{const x=(a.p||{})[k],y=(b.p||{})[k];o.p[k]=!x?y:!y?x:(x.r+x.x>=y.r+y.x?x:y)});
+  [...(a.c||[]),...(b.c||[])].forEach(i=>{if(!o.c.some(j=>j[0]===i[0]&&(j[4]||"JLPT N3")===(i[4]||"JLPT N3")))o.c.push(i)});return o;
+}
+
+// Event Handler Auth Google
+const btnLogin = $("#btn-login");
+btnLogin.onclick = () => {
+  if (currentUser) {
+    signOut(auth);
+  } else {
+    signInWithPopup(auth, provider).catch(err => {
+      alert("Gagal login dengan Google: " + err.message);
+    });
+  }
+};
+
+onAuthStateChanged(auth, async (user) => {
+  const info = $("#auth-info");
+  if (user) {
+    currentUser = user;
+    info.textContent = "";
+    if(user.photoURL){
+      const img = el("img","auth-avatar");
+      img.src = user.photoURL;
+      info.append(img);
+    }
+    const nameSpan = el("span","",user.displayName || user.email);
+    info.append(nameSpan);
+    btnLogin.textContent = "Keluar";
+    btnLogin.classList.add("out");
+
+    // Load data progres user dari Firestore
+    try {
+      const docRef = doc(db, "users", user.uid, "appData", "progress");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        S = merge(S, docSnap.data());
+        localStorage.setItem(KEY, JSON.stringify(S));
+      }
+      sy("Terhubung: " + user.displayName);
+      push();
+    } catch(e) {
+      sy("Terhubung (mode offline)");
+    }
+  } else {
+    currentUser = null;
+    info.textContent = "";
+    info.append(el("span","mut","Disimpan di perangkat ini"));
+    btnLogin.textContent = "Login Google";
+    btnLogin.classList.remove("out");
+  }
+  if (view === "stat" || view === "lb") draw();
+});
+
+$("#ms").onchange=e=>{let v=e.target.value;if(v==="__new"){v=(prompt("Nama set materi baru?")||"").trim();if(!v||Object.keys(SETS).concat(S.ns||[]).includes(v)){fillSets();return}(S.ns=S.ns||[]).push(v)}S.set=v;cat="*";tema="*";n=0;ok=0;cur=null;locked=false;save();draw()};
+draw();
+</script>
+</body>
+</html>
