@@ -1,0 +1,178 @@
+[
+  {
+    "id": "n3_k1",
+    "type": "KANJI",
+    "kanji": "経済",
+    "kana": "けいざい",
+    "meaning": "Ekonomi",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "経 (Mengatur/Benang) + 済 (Menyelamatkan)",
+    "analogy": "Berasal dari 经世济民 (Mengatur dunia dan menyelamatkan rakyat), dikeringkaskan menjadi 経済."
+  },
+  {
+    "id": "n3_k2",
+    "type": "KANJI",
+    "kanji": "政治",
+    "kana": "せいじ",
+    "meaning": "Politik / Pemerintahan",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "水 (Air) + 正 (Lurus)",
+    "analogy": "Pemerintahan (政治) mengalirkan aturan dengan lurus dan adil seperti air."
+  },
+  {
+    "id": "n3_k3",
+    "type": "KANJI",
+    "kanji": "面接",
+    "kana": "めんせつ",
+    "meaning": "Wawancara Kerja",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "面 (Wajah) + 接 (Menghubungkan)",
+    "analogy": "Tatap muka secara langsung untuk menyambung hubungan kerja."
+  },
+  {
+    "id": "n3_k4",
+    "type": "KANJI",
+    "kanji": "残業",
+    "kana": "ざんぎょう",
+    "meaning": "Kerja Lembur",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "歹 (Sisa) + 業 (Pekerjaan)",
+    "analogy": "Menyelesaikan sisa tugas di luar jam kerja reguler."
+  },
+  {
+    "id": "n3_k5",
+    "type": "KANJI",
+    "kanji": "給料",
+    "kana": "きゅうりょう",
+    "meaning": "Gaji / Upah Bulanan",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "給 (Memberi) + 料 (Uang/Bahan)",
+    "analogy": "Imbalan finansial yang diberikan atas hasil kerja."
+  },
+  {
+    "id": "n3_k6",
+    "type": "KANJI",
+    "kanji": "発達",
+    "kana": "はったつ",
+    "meaning": "Perkembangan / Pertumbuhan",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "発 (Mulai/Keluar) + 達 (Tercapai)",
+    "analogy": "Pertumbuhan yang muncul hingga mencapai tingkat kemajuan tertentu."
+  },
+  {
+    "id": "n3_v1",
+    "type": "KOTOBA",
+    "kanji": "書類",
+    "kana": "しょるい",
+    "meaning": "Dokumen / Berkas Kerja",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": null,
+    "analogy": "Kosakata administratif seputar berkas dan dokumen kantor."
+  },
+  {
+    "id": "n3_v2",
+    "type": "KOTOBA",
+    "kanji": "交差点",
+    "kana": "こうさてん",
+    "meaning": "Persimpangan Jalan",
+    "level": "N3",
+    "subject": "TRANS",
+    "busyu": null,
+    "analogy": "Kosakata lalulintas mengenai titik temu silang jalan."
+  },
+  {
+    "id": "n3_v3",
+    "type": "KOTOBA",
+    "kanji": "遠慮する",
+    "kana": "えんりょする",
+    "meaning": "Sungkan / Menolak dengan Halus",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": null,
+    "analogy": "Ungkapan kesopanan khas masyarakat Jepang saat berinteraksi."
+  },
+  {
+    "id": "n3_b1",
+    "type": "BUNPOU",
+    "kanji": "〜うちに",
+    "kana": "uchi ni",
+    "meaning": "Selagi / Mumpung...",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Melakukan suatu tindakan sebelum kondisi berubah.<br><b>Contoh:</b> 日本にいる<b>うちに</b>富士山に登りたい。(Selagi ada di Jepang, ingin mendaki Gn. Fuji)."
+  },
+  {
+    "id": "n3_b2",
+    "type": "BUNPOU",
+    "kanji": "〜わけではない",
+    "kana": "wake de wa nai",
+    "meaning": "Bukan berarti 100% begitu...",
+    "level": "N3",
+    "subject": "WORK",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Menyanggah andaikan/prasangka.<br><b>Contoh:</b> 嫌いな<b>わけではない</b>が、食べたくない。(Bukan berarti benci, tapi sedang tidak ingin makan)."
+  },
+  {
+    "id": "n3_b3",
+    "type": "BUNPOU",
+    "kanji": "〜ぎり",
+    "kana": "giri",
+    "meaning": "Hanya / Sejak... tidak pernah lagi",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Kejadian yang menjadi batas titik terakhir.<br><b>Contoh:</b> 会ったのはそれ<b>ぎり</b>だ。(Ketemu terakhir kali ya saat itu saja)."
+  },
+  {
+    "id": "n3_b4",
+    "type": "BUNPOU",
+    "kanji": "〜決して…ない",
+    "kana": "kesshite...nai",
+    "meaning": "Sama sekali tidak pernah...",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Penegasan kesungguhan penolakan atau komitmen.<br><b>Contoh:</b> <b>決して</b>あきらめない。(Sama sekali tidak akan pernah menyerah)."
+  },
+  {
+    "id": "n3_b5",
+    "type": "BUNPOU",
+    "kanji": "〜別に…ない",
+    "kana": "betsu ni...nai",
+    "meaning": "Tidak terlalu / Tidak ada yang khusus...",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Menyatakan ketidakberadaan hal istimewa.<br><b>Contoh:</b> <b>別に</b>問題はない。(Tidak ada masalah khusus)."
+  },
+  {
+    "id": "n3_b6",
+    "type": "BUNPOU",
+    "kanji": "〜滅多に…ない",
+    "kana": "metta ni...nai",
+    "meaning": "Jarang sekali...",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Menyatakan frekuensi kejadian yang sangat jarang.<br><b>Contoh:</b> <b>滅多に</b>雪が降らない。(Jarang sekali turun salju)."
+  },
+  {
+    "id": "n3_b7",
+    "type": "BUNPOU",
+    "kanji": "〜さえ…ば",
+    "kana": "sae...ba",
+    "meaning": "Asalkan...",
+    "level": "N3",
+    "subject": "DAILY",
+    "busyu": "Pola Tata Bahasa N3",
+    "analogy": "<b>Fungsi:</b> Persyaratan tunggal yang mencukupi.<br><b>Contoh:</b> 水<b>さえ</b>あれ<b>ば</b>生きられる。(Asalkan ada air, bisa bertahan hidup)."
+  }
+]
