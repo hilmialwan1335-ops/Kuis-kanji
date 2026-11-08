@@ -1,0 +1,10 @@
+[
+  {"id":"n4_k1","type":"KANJI","kanji":"試","kana":"し / こころみる","meaning":"Mencoba / Ujian","level":"N4","subject":"WORK","busyu":"言 (Kata) + 式 (Bentuk)","analogy":"Mengucapkan kata-kata sesuai bentuk aturan dalam ujian."},
+  {"id":"n4_k2","type":"KANJI","kanji":"験","kana":"けん / ためす","meaning":"Menguji / Efek","level":"N4","subject":"WORK","busyu":"馬 (Kuda) + 兼 (Bersama)","analogy":"Menguji kekuatan kuda untuk mengetahui kemampuannya."},
+  {"id":"n4_k3","type":"KANJI","kanji":"貸す","kana":"かす","meaning":"Meminjamkan","level":"N4","subject":"DAILY","busyu":"代 (Ganti) + 貝 (Uang/Harta)","analogy":"Menyerahkan uang/barang sementara sebagai pengganti."},
+  {"id":"n4_k4","type":"KANJI","kanji":"借りる","kana":"かりる","meaning":"Meminjam","level":"N4","subject":"DAILY","busyu":"人 (Orang) + 昔 (Lama)","analogy":"Meminjam barang milik orang lain untuk sementara waktu."},
+  {"id":"n4_v1","type":"KOTOBA","kanji":"準備する","kana":"じゅんびする","meaning":"Mempersiapkan / Persiapan","level":"N4","subject":"WORK","busyu":null,"analogy":"Kosakata umum seputar persiapan kerja/ujian."},
+  {"id":"n4_v2","type":"KOTOBA","kanji":"約束","kana":"やくそく","meaning":"Janji / Perjanjian","level":"N4","subject":"DAILY","busyu":null,"analogy":"Komitmen janji dengan orang lain."},
+  {"id":"n4_b1","type":"BUNPOU","kanji":"〜ことにする","kana":"koto ni suru","meaning":"Memutuskan untuk...","level":"N4","subject":"WORK","busyu":"Pola Tata Bahasa N4","analogy":"<b>Fungsi:</b> Keputusan pribadi atas pilihan sendiri.<br><b>Contoh:</b> 毎朝6時に起きることにした。(Saya memutuskan untuk bangun jam 6 setiap pagi)."},
+  {"id":"n4_b2","type":"BUNPOU","kanji":"〜ほうがいい","kana":"hou ga ii","meaning":"Sebaiknya... (Saran)","level":"N4","subject":"HEALTH","busyu":"Pola Tata Bahasa N4","analogy":"<b>Fungsi:</b> Memberikan saran atau anjuran.<br><b>Contoh:</b> 病院へ行ったほうがいい。(Sebaiknya kamu pergi ke rumah sakit)."}
+]
