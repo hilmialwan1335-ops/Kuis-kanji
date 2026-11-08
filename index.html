@@ -273,18 +273,18 @@
         </div>
 
         <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
-          <span class="font-bold text-slate-700 block">2. 👁️ Apa itu Furigana?</span>
+          <span class="font-bold text-indigo-700 block">2. 👁️ Apa itu Furigana?</span>
           <p>Huruf kecil di atas kanji untuk membantu membaca. Anda bisa menampilkan atau menyembunyikannya lewat tombol pengaturan di atas.</p>
         </div>
 
         <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
-          <span class="font-bold text-slate-700 block">3. ✍️ Apa itu Bunpou (Tata Bahasa)?</span>
+          <span class="font-bold text-indigo-700 block">3. ✍️ Apa itu Bunpou (Tata Bahasa)?</span>
           <p>Pola kalimat tingkat lanjut (seperti level N3). Setelah menjawab, kotak penjelasan dan contoh kalimat akan terbuka otomatis.</p>
         </div>
 
         <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
-          <span class="font-bold text-slate-700 block">4. 📊 Statistik & Sistem Hafalan (Tersinkron Cloud)</span>
-          <p>Progres latihan Anda tersimpan otomatis di akun Cloud Firebase. Suatu materi dianggap <b>"Sudah Hafal"</b> jika berhasil dijawab benar minimal 4 kali.</p>
+          <span class="font-bold text-indigo-700 block">4. 📊 Statistik & Sistem Hafalan (Tersinkron Cloud)</span>
+          <p>Progres latihan & waktu belajar Anda tersinkron otomatis ke Cloud Firebase. Suatu materi dianggap <b>"Sudah Hafal"</b> jika berhasil dijawab benar minimal 4 kali.</p>
         </div>
       </div>
 
@@ -378,7 +378,7 @@
     // SINKRONISASI HAFALAN KE FIRESTORE
     async function syncMasteryToCloud() {
       const user = auth.currentUser;
-      if (!user) return; // Hanya simpan ke cloud jika sudah login
+      if (!user) return;
 
       try {
         await setDoc(doc(db, "users", user.uid, "progress", "mastery_data"), {
@@ -857,7 +857,7 @@
       });
     }
 
-    // AUTH STATE & LOAD CLOUD MASTERY DATA
+    // AUTH STATE & LOAD CLOUD DATA (MASTERY & STUDY TIME)
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         userStatus.innerText = "Tersinkron: " + user.displayName;
@@ -865,17 +865,27 @@
         userProfile.classList.remove('hidden');
         userPhoto.src = user.photoURL || 'https://via.placeholder.com/32';
 
-        // Tarik riwayat hafalan user dari Firestore Cloud
         try {
+          // 1. Tarik data profil utama (termasuk studyMinutes) dari Firestore
+          const userDocRef = doc(db, "users", user.uid);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            if (userData.studyMinutes) {
+              totalStudyTimeSeconds = userData.studyMinutes * 60;
+            }
+          }
+
+          // 2. Tarik riwayat hafalan user dari Firestore Cloud
           const masteryDocRef = doc(db, "users", user.uid, "progress", "mastery_data");
-          const docSnap = await getDoc(masteryDocRef);
-          if (docSnap.exists()) {
-            userMasteryState = docSnap.data().masteryState || {};
+          const masterySnap = await getDoc(masteryDocRef);
+          if (masterySnap.exists()) {
+            userMasteryState = masterySnap.data().masteryState || {};
           } else {
             userMasteryState = {};
           }
         } catch (err) {
-          console.error("Gagal menarik data hafalan dari cloud:", err);
+          console.error("Gagal menarik data dari cloud:", err);
           userMasteryState = {};
         }
 
@@ -887,7 +897,8 @@
         btnLogin.classList.remove('hidden');
         userProfile.classList.add('hidden');
         userCustomQuestions = [];
-        userMasteryState = {}; // Reset lokal jika logout
+        userMasteryState = {}; 
+        totalStudyTimeSeconds = 0; // Reset lokal jika logout
         await loadAllJSONDatasets();
         updateStatsUI();
       }
