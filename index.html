@@ -14,20 +14,26 @@
   <header class="bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-10 shadow-sm">
     <div class="max-w-md mx-auto flex justify-between items-center">
       <div>
-        <h1 class="text-lg font-bold text-slate-800 tracking-tight">Yuk Belajar Bahasa Jepang</h1>
+        <h1 class="text-base font-bold text-slate-800 tracking-tight">Yuk Belajar Bahasa Jepang</h1>
         <p id="user-status" class="text-xs text-slate-400">Mode Lokal (Disimpan di browser)</p>
       </div>
 
-      <!-- Area Autentikasi -->
-      <div id="auth-container" class="flex items-center gap-2">
-        <button id="btn-login" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
-          Login Google
+      <!-- Tombol Panduan & Autentikasi -->
+      <div class="flex items-center gap-2">
+        <button onclick="openWelcomeModal()" class="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium px-2 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+          <span>📖 Panduan</span>
         </button>
-        <div id="user-profile" class="hidden flex items-center gap-2">
-          <img id="user-photo" class="w-7 h-7 rounded-full border border-slate-300" src="" alt="Profile">
-          <button id="btn-logout" class="bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 text-xs font-medium px-2.5 py-1.5 rounded-lg border border-slate-200 transition">
-            Logout
+
+        <div id="auth-container" class="flex items-center gap-2">
+          <button id="btn-login" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+            Login
           </button>
+          <div id="user-profile" class="hidden flex items-center gap-2">
+            <img id="user-photo" class="w-7 h-7 rounded-full border border-slate-300" src="" alt="Profile">
+            <button id="btn-logout" class="bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 text-xs font-medium px-2 py-1.5 rounded-lg border border-slate-200 transition">
+              Keluar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -247,6 +253,50 @@
 
   </main>
 
+  <!-- MODAL INTRO / PANDUAN PENGGUNA BARU -->
+  <div id="welcome-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[85vh]">
+      
+      <!-- Header Modal -->
+      <div class="bg-indigo-600 p-4 text-white flex justify-between items-center">
+        <h3 class="font-bold text-sm flex items-center gap-2">
+          <span>🎌</span> Panduan Yuk Belajar Bahasa Jepang
+        </h3>
+        <button onclick="closeWelcomeModal()" class="text-indigo-200 hover:text-white font-bold text-lg">&times;</button>
+      </div>
+
+      <!-- Isi Panduan (Scrollable) -->
+      <div class="p-4 space-y-3 text-xs text-slate-700 overflow-y-auto leading-relaxed">
+        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 space-y-1">
+          <span class="font-bold text-indigo-700 block">1. 📚 Mulai dari Section "Cara Baca"</span>
+          <p>Bagi pemula, kuasai dulu Hiragana & Katakana. Nyalakan tombol suara audio untuk melatih pendengaran pelafalan aslinya.</p>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+          <span class="font-bold text-slate-700 block">2. 👁️ Apa itu Furigana?</span>
+          <p>Huruf kecil di atas kanji untuk membantu membaca. Anda bisa menampilkan atau menyembunyikannya lewat tombol pengaturan di atas.</p>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+          <span class="font-bold text-slate-700 block">3. ✍️ Apa itu Bunpou (Tata Bahasa)?</span>
+          <p>Pola kalimat tingkat lanjut (seperti level N3). Setelah menjawab, kotak penjelasan dan contoh kalimat akan terbuka otomatis.</p>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+          <span class="font-bold text-slate-700 block">4. 📊 Statistik & Sistem Hafalan (Tersinkron Cloud)</span>
+          <p>Progres latihan Anda tersimpan otomatis di akun Cloud Firebase. Suatu materi dianggap <b>"Sudah Hafal"</b> jika berhasil dijawab benar minimal 4 kali.</p>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <div class="p-4 bg-slate-50 border-t border-slate-100">
+        <button onclick="closeWelcomeModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl transition shadow-sm text-xs">
+          Mulai Belajar Sekarang 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER & IMPOR DECK ANKI -->
   <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500 space-y-4">
     <div class="max-w-md mx-auto">
@@ -272,7 +322,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDocs, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBgdH-0Eb4k_O6rnou1B_C3FAFc6rKp3qk",
@@ -324,6 +374,40 @@
         console.error("Gagal memuat file JSON dataset:", err);
       }
     }
+
+    // SINKRONISASI HAFALAN KE FIRESTORE
+    async function syncMasteryToCloud() {
+      const user = auth.currentUser;
+      if (!user) return; // Hanya simpan ke cloud jika sudah login
+
+      try {
+        await setDoc(doc(db, "users", user.uid, "progress", "mastery_data"), {
+          masteryState: userMasteryState,
+          updatedAt: new Date()
+        }, { merge: true });
+      } catch (err) {
+        console.error("Gagal menyinkronkan progres hafalan:", err);
+      }
+    }
+
+    // PANDUAN MODAL WELCOME
+    window.openWelcomeModal = function() {
+      document.getElementById('welcome-modal').classList.remove('hidden');
+    }
+
+    window.closeWelcomeModal = function() {
+      document.getElementById('welcome-modal').classList.add('hidden');
+      localStorage.setItem('has_seen_welcome_intro', 'true');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hasSeen = localStorage.getItem('has_seen_welcome_intro');
+      if (!hasSeen) {
+        setTimeout(() => {
+          openWelcomeModal();
+        }, 500);
+      }
+    });
 
     setInterval(() => {
       totalStudyTimeSeconds++;
@@ -614,6 +698,9 @@
       userMasteryState[q.id].totalAttempts++;
       if (isCorrect) userMasteryState[q.id].correctCount++;
 
+      // Simpan pembaruan hafalan langsung ke Firestore secara real-time
+      syncMasteryToCloud();
+
       if (q.level !== "READING" && (q.busyu || q.analogy)) {
         const busyuCard = document.getElementById('busyu-explanation-card');
         const busyuContent = document.getElementById('busyu-content');
@@ -766,10 +853,11 @@
     if (btnLogout) {
       btnLogout.addEventListener('click', async () => {
         await signOut(auth);
-        alert("Berhasil logout.");
+        alert("Berhasil keluar.");
       });
     }
 
+    // AUTH STATE & LOAD CLOUD MASTERY DATA
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         userStatus.innerText = "Tersinkron: " + user.displayName;
@@ -777,14 +865,31 @@
         userProfile.classList.remove('hidden');
         userPhoto.src = user.photoURL || 'https://via.placeholder.com/32';
 
+        // Tarik riwayat hafalan user dari Firestore Cloud
+        try {
+          const masteryDocRef = doc(db, "users", user.uid, "progress", "mastery_data");
+          const docSnap = await getDoc(masteryDocRef);
+          if (docSnap.exists()) {
+            userMasteryState = docSnap.data().masteryState || {};
+          } else {
+            userMasteryState = {};
+          }
+        } catch (err) {
+          console.error("Gagal menarik data hafalan dari cloud:", err);
+          userMasteryState = {};
+        }
+
         await loadUserCustomQuestions(user.uid);
         syncStudyTimeToCloud();
+        updateStatsUI();
       } else {
         userStatus.innerText = "Mode Lokal (Disimpan di browser)";
         btnLogin.classList.remove('hidden');
         userProfile.classList.add('hidden');
         userCustomQuestions = [];
+        userMasteryState = {}; // Reset lokal jika logout
         await loadAllJSONDatasets();
+        updateStatsUI();
       }
     });
 
