@@ -1,0 +1,12 @@
+[
+  {"id":"n5_k1","type":"KANJI","kanji":"日","kana":"ひ / にち","meaning":"Matahari / Hari","level":"N5","subject":"DAILY","busyu":"日 (Matahari)","analogy":"Bentuk bulat matahari dengan garis di tengahnya."},
+  {"id":"n5_k2","type":"KANJI","kanji":"月","kana":"つき / げつ","meaning":"Bulan / Bulan (Kalender)","level":"N5","subject":"DAILY","busyu":"月 (Bulan)","analogy":"Bentuk bulan sabit yang menggantung di langit."},
+  {"id":"n5_k3","type":"KANJI","kanji":"水","kana":"みず / すい","meaning":"Air","level":"N5","subject":"DAILY","busyu":"水 (Air)","analogy":"Percikan air yang mengalir di tengah sungai."},
+  {"id":"n5_k4","type":"KANJI","kanji":"火","kana":"ひ / か","meaning":"Api","level":"N5","subject":"DAILY","busyu":"火 (Api)","analogy":"Kobaran api dengan percikan di sisi kiri dan kanan."},
+  {"id":"n5_k5","type":"KANJI","kanji":"木","kana":"き / もく","meaning":"Pohon","level":"N5","subject":"DAILY","busyu":"木 (Pohon)","analogy":"Batang pohon dengan dahan dan akar yang menjalar."},
+  {"id":"n5_v1","type":"KOTOBA","kanji":"食べる","kana":"たべる","meaning":"Makan","level":"N5","subject":"DAILY","busyu":null,"analogy":"Kata kerja dasar sehari-hari."},
+  {"id":"n5_v2","type":"KOTOBA","kanji":"飲む","kana":"のむ","meaning":"Minum","level":"N5","subject":"DAILY","busyu":null,"analogy":"Kata kerja dasar minum."},
+  {"id":"n5_v3","type":"KOTOBA","kanji":"行きます","kana":"いきます","meaning":"Pergi","level":"N5","subject":"TRANS","busyu":null,"analogy":"Kata kerja bepergian."},
+  {"id":"n5_b1","type":"BUNPOU","kanji":"〜から〜まで","kana":"kara...made","meaning":"Dari... Sampai...","level":"N5","subject":"DAILY","busyu":"Pola Tata Bahasa N5","analogy":"<b>Fungsi:</b> Menunjukkan titik awal dan titik akhir waktu/tempat.<br><b>Contoh:</b> 9時から5時まで働きます。(Bekerja dari jam 9 sampai jam 5)."},
+  {"id":"n5_b2","type":"BUNPOU","kanji":"〜へ行く","kana":"e iku","meaning":"Pergi ke...","level":"N5","subject":"TRANS","busyu":"Pola Tata Bahasa N5","analogy":"<b>Fungsi:</b> Menunjukkan arah tujuan bepergian.<br><b>Contoh:</b> 日本へ行きます。(Pergi ke Jepang)."}
+]
