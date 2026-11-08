@@ -1,0 +1,22 @@
+// Mengunduh Seluruh Bank Soal (Kana + N5 + N4 + N3)
+async function loadAllJSONDatasets() {
+  try {
+    const [resKana, resN5, resN4, resN3] = await Promise.all([
+      fetch('./data_kana.json'),
+      fetch('./data_n5.json'),
+      fetch('./data_n4.json'),
+      fetch('./data_n3.json')
+    ]);
+
+    const dataKana = await resKana.json();
+    const dataN5 = await resN5.json();
+    const dataN4 = await resN4.json();
+    const dataN3 = await resN3.json();
+
+    // Menggabungkan seluruh data menjadi Master Bank Soal
+    masterQuizBank = [...dataKana, ...dataN5, ...dataN4, ...dataN3];
+    applyFilters();
+  } catch (err) {
+    console.error("Gagal memuat file JSON dataset:", err);
+  }
+}
